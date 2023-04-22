@@ -25,21 +25,43 @@ const AuthenticatedScreen=()=>{
       <Tab.Screen
       name="Home"
       component={HomeScreen}
+      
+      options={{
+        tabBarIcon:({ color,size })=>{
+          return <Ionicons name={"home-outline"} size={18}/>
+        },
+        headerShown:false
+      }}
       />
 
 <Tab.Screen
       name="Cart"
       component={CartScreen}
+      options={{
+        tabBarIcon:({ color,size })=>{
+          return <Ionicons name={"cart-outline"} size={18}/>
+        }
+      }}
       />
 
 <Tab.Screen
       name="Wishlist"
       component={WishlistScreen}
+      options={{
+        tabBarIcon:({ color,size })=>{
+          return <Ionicons name={"heart-outline"} size={18}/>
+        }
+      }}
       />
 
 <Tab.Screen
       name="Profile"
       component={ProfileScreen}
+      options={{
+        tabBarIcon:({ color,size })=>{
+          return <Ionicons name={"person-outline"} size={18}/>
+        }
+      }}
       />
 
     </Tab.Navigator>
@@ -48,9 +70,11 @@ const AuthenticatedScreen=()=>{
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    
+   <SafeAreaProvider>
+    <NavigationContainer>
+      <AuthenticatedScreen/>
+    </NavigationContainer>
+   </SafeAreaProvider>
   );
 }
