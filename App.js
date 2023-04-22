@@ -1,7 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from "@expo/vector-icons";
-
-import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider} from "react-native-safe-area-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";

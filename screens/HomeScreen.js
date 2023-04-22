@@ -7,7 +7,9 @@ import {
   ScrollView,
   FlatList,
   Image,
-  Dimensions
+  Dimensions,
+  Button,
+  Pressable
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../util/Colors";
@@ -91,10 +93,6 @@ const HomeScreen = () => {
             columnWrapperStyle={{
                 justifyContent: 'space-between'
             }}
-            contentContainerStyle={{
-                // paddingHorizontal: 10, // Add horizontal padding between items
-                // paddingVertical: 5, // Add vertical padding between items
-              }}
             numColumns={2}
             data={Products}
             showsVerticalScrollIndicator={false}
@@ -108,12 +106,20 @@ const HomeScreen = () => {
                         <View style={styles.productDetailsView}>
                          
                         <Text>{itemData.item.name}</Text>
-                        <Text>{`$${itemData.item.price}`}</Text>
+                        <Text style={styles.prodcutPrice} >{`$${itemData.item.price}`}</Text>
+
+                        <Pressable onPress={()=>{console.log('');}}>
+                        <View style={styles.addToCartButton}>
+                            <Text style={styles.addToCartText}>Add to cart</Text>
+                            </View>
+                        </Pressable>
+
                         </View>
+
+                        
                     </View>
                 )
             }}
-            // flexGrow={0}
             />
         </View>
       </View>
@@ -158,7 +164,6 @@ const styles = StyleSheet.create({
     borderWidth: 0.3,
     borderColor: "#939393",
     borderRadius: 5,
-    //    borderWidth:3
   },
   textInput: {
     padding: 10,
@@ -172,6 +177,8 @@ const styles = StyleSheet.create({
     width:width,
     marginBottom:20,
     borderRadius:8,
+    elevation: 3,
+    shadowOpacity:0.15,
     backgroundColor:'#EDF7FF'
   },
   imageView:{
@@ -184,7 +191,24 @@ const styles = StyleSheet.create({
     width:"100%"
   },
   productDetailsView:{
+    marginTop:10,
+    paddingHorizontal:15,
     paddingBottom:15
+  },
+  prodcutPrice:{
+    marginTop:10,
+    fontWeight:'bold',
+    fontSize:16
+  },
+  addToCartButton:{
+    backgroundColor:Colors.PrimaryColor,
+    paddingVertical:8,
+    marginTop:10,
+    borderRadius:4
+  },
+  addToCartText:{
+    textAlign:'center',
+    color:'white'
   }
 });
 export default HomeScreen;
