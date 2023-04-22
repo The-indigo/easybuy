@@ -1,5 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider} from "react-native-safe-area-context";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import HomeScreen from './screens/HomeScreen';
+
+
+
+
+const Stack= createNativeStackNavigator()
+const Tab=createBottomTabNavigator()
+
+
+const AuthenticatedScreen=()=>{
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+      
+      name="Home"
+      component={HomeScreen}
+      />
+
+    </Tab.Navigator>
+  )
+}
 
 export default function App() {
   return (
@@ -9,12 +34,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
