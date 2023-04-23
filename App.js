@@ -3,12 +3,23 @@ import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaProvider} from "react-native-safe-area-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
+import * as SplashScreen from 'expo-splash-screen';
 
+import { Text } from 'react-native';
+
+import { NavigationContainer } from "@react-navigation/native";
+import * as Font from 'expo-font';
+import {
+  useFonts,
+  Inter_900Black,
+  Inter_400Regular
+} from '@expo-google-fonts/inter';
 import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
 import WishlistScreen from './screens/WishlistScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import AppLoading from 'expo-app-loading';
+import {useCallback, useEffect, useState } from 'react';
 
 
 
@@ -67,10 +78,26 @@ const AuthenticatedScreen=()=>{
 }
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Inter_900Black,
+    Inter_400Regular
+  });
+
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+  if(!fontsLoaded){
+    return null
+  }
+   
   return (
     
    <SafeAreaProvider>
-    <NavigationContainer>
+    
+    <NavigationContainer onReady={onLayoutRootView}>
       <AuthenticatedScreen/>
     </NavigationContainer>
    </SafeAreaProvider>

@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     color: Colors.HeadingColor,
+    fontFamily:'Inter_400Regular'
   },
   
 });
