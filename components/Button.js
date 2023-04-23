@@ -2,20 +2,21 @@ import {
     Text,
     View,
     StyleSheet,
-    Pressable
+    Pressable,
+    TouchableOpacity
   } from "react-native";
   import Colors from "../util/Colors";
 
 const Button=({text,color,padding})=>{
     return (
-        <Pressable onPress={()=>{console.log('');}}>
+        <TouchableOpacity onPress={()=>{console.log('');}}>
         <View style={[styles.addToCartButton,{
              backgroundColor: color?color:Colors.PrimaryColor,
              paddingVertical:padding?padding:9,
         }]}>
             <Text style={styles.addToCartText}>{text?text:'Add to cart'}</Text>
             </View>
-        </Pressable>
+        </TouchableOpacity>
     )
 }
 const styles= StyleSheet.create({
