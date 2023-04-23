@@ -17,9 +17,7 @@ const SearchScreen=()=>{
         </View>
         <Ionicons name={"cart-outline"} size={23} />
                 </View>
-                <View style={styles.hr}>
-
-                </View>
+               <Hr/>
                 <View style={styles.searchView}>
                     <View>
                         <Text style={styles.searchResultText}>Search result for "Earphone"</Text>
@@ -73,11 +71,6 @@ flex:1,
         marginLeft: 5,
         flex:0.85
       },
-      hr:{
-        borderWidth:0.3,
-        borderColor:Colors.BorderColor,
-        marginTop:10
-      },
       searchView:{
         marginTop:12,
         flex:1,
@@ -86,7 +79,6 @@ flex:1,
       searchResultText:{
         color:Colors.HeadingColor,
         fontFamily:'Inter_500Medium',
-        // fontWeight:600,
         fontSize:15
       },
       flatlistView:{

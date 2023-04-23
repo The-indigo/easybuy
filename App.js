@@ -24,6 +24,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import AppLoading from 'expo-app-loading';
 import {useCallback, useEffect, useState } from 'react';
 import SearchScreen from './screens/SearchScreen';
+import DetailScreen from './screens/DetailScreen';
 
 
 
@@ -108,12 +109,21 @@ export default function App() {
       <Stack.Navigator>
 
       <Stack.Screen 
+      name='Details'
+      component={DetailScreen}
+      options={{
+        headerTitle:"Deatails Product"
+      }}
+      />
+
+      <Stack.Screen 
       name='Search'
       component={SearchScreen}
       options={{
         headerShown:false
       }}
       />
+
             </Stack.Navigator>
 
       {/* <AuthenticatedScreen/> */}
