@@ -12,7 +12,10 @@ import * as Font from 'expo-font';
 import {
   useFonts,
   Inter_900Black,
-  Inter_400Regular
+  Inter_400Regular,
+  Inter_600SemiBold,
+  Inter_500Medium,
+  Inter_700Bold
 } from '@expo-google-fonts/inter';
 import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
@@ -20,12 +23,14 @@ import WishlistScreen from './screens/WishlistScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import AppLoading from 'expo-app-loading';
 import {useCallback, useEffect, useState } from 'react';
+import SearchScreen from './screens/SearchScreen';
 
 
 
 
 const Stack= createNativeStackNavigator()
 const Tab=createBottomTabNavigator()
+
 
 
 const AuthenticatedScreen=()=>{
@@ -80,7 +85,10 @@ const AuthenticatedScreen=()=>{
 export default function App() {
   let [fontsLoaded] = useFonts({
     Inter_900Black,
-    Inter_400Regular
+    Inter_400Regular,
+    Inter_600SemiBold,
+    Inter_500Medium,
+  Inter_700Bold
   });
 
 
@@ -96,9 +104,19 @@ export default function App() {
   return (
     
    <SafeAreaProvider>
-    
     <NavigationContainer onReady={onLayoutRootView}>
-      <AuthenticatedScreen/>
+      <Stack.Navigator>
+
+      <Stack.Screen 
+      name='Search'
+      component={SearchScreen}
+      options={{
+        headerShown:false
+      }}
+      />
+            </Stack.Navigator>
+
+      {/* <AuthenticatedScreen/> */}
     </NavigationContainer>
    </SafeAreaProvider>
   );
