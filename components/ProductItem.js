@@ -37,7 +37,7 @@ const styles= StyleSheet.create({
     productItemView:{
         width:width,
         marginBottom:20,
-        borderRadius:8,
+        borderRadius:10,
         elevation: 3,
         shadowOpacity:0.15,
         backgroundColor:'#EDF7FF'

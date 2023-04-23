@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View,TextInput, ScrollView } from "react-native"
+import { SafeAreaView, StyleSheet, Text, View,TextInput } from "react-native"
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../util/Colors";
 import { FlatList } from "react-native";
