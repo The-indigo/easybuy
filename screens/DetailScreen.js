@@ -8,13 +8,13 @@ import {
   Text,
   Image,
   Dimensions,
-  TouchableOpacity,
 } from "react-native";
 import ColorPicker from "../components/ColorPicker";
 import Hr from "../components/Hr";
+import Button from "../components/Button";
 
 let height = Dimensions.get("window").height * 0.3;
-
+let width=Dimensions.get("window").width;
 const DetailScreen = ({ route, navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -26,7 +26,7 @@ const DetailScreen = ({ route, navigation }) => {
   return (
     <View style={styles.root}>
       <View style={styles.flex}>
-        <ScrollView style={styles.scrollView} bounces={false}>
+        <ScrollView style={styles.scrollView}>
           <View style={styles.imageView}>
             <Image
               style={styles.image}
@@ -39,10 +39,7 @@ const DetailScreen = ({ route, navigation }) => {
                 <Text style={styles.productNameText}>
                   Air pods max by Apple
                 </Text>
-                <View style={styles.productPriceTextView}>
                   <Text style={styles.productPriceText}>$ 1999,99 </Text>
-                  <Text>(219 people buy this)</Text>
-                </View>
               </View>
               <View style={styles.iconView}>
                 <Ionicons name="heart-outline" size={20} color={"grey"} />
@@ -77,6 +74,12 @@ const DetailScreen = ({ route, navigation }) => {
             </View>
           </View>
         </ScrollView>
+        <View style={{
+                paddingHorizontal: 30,
+        }}>
+        <Button/>
+        </View>
+      
       </View>
     </View>
   );
@@ -84,6 +87,7 @@ const DetailScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
+    marginBottom:35
   },
   root: {
     flex: 1,
@@ -110,10 +114,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     justifyContent: "space-between",
   },
-  productPriceTextView: {
-    flexDirection: "row",
-    gap: 8,
-  },
+
   productNameText: {
     marginBottom: 5,
     fontSize: 16,

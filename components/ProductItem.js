@@ -7,6 +7,7 @@ import {
     Pressable
   } from "react-native";
   import Colors from "../util/Colors";
+import Button from "./Button";
 
   const width = (Dimensions.get('window').width - 4 * 10) / 2;
 
@@ -21,11 +22,7 @@ const ProductItem=({source,name,price})=>{
         <Text>{name}</Text>
         <Text style={styles.prodcutPrice} >{`$${price}`}</Text>
 
-        <Pressable onPress={()=>{console.log('');}}>
-        <View style={styles.addToCartButton}>
-            <Text style={styles.addToCartText}>Add to cart</Text>
-            </View>
-        </Pressable>
+      <Button/>
 
         </View>
 
@@ -61,16 +58,7 @@ const styles= StyleSheet.create({
         fontWeight:'bold',
         fontSize:16
       },
-      addToCartButton:{
-        backgroundColor:Colors.PrimaryColor,
-        paddingVertical:8,
-        marginTop:10,
-        borderRadius:4
-      },
-      addToCartText:{
-        textAlign:'center',
-        color:'white'
-      }
+
 })
 
 
