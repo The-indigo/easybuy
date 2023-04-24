@@ -72,6 +72,7 @@ const AuthenticatedScreen=()=>{
       name="Profile"
       component={ProfileScreen}
       options={{
+        headerShown:false,
         tabBarIcon:({ color,size })=>{
           return <Ionicons name={"person-outline"} size={18}/>
         }

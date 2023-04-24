@@ -5,7 +5,8 @@ HeadingColor:'#393F42',
 BorderColor:'#939393',
 ProductBackgroundColor:'##EDF7FF',
 Grey:'#ECECEC',
-DarkGrey:'#939393'
+DarkGrey:'#939393',
+button100: '#0c1012',
 
 }
 export default Colors

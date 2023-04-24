@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     cartItemView: {
         flexDirection: "row",
         marginTop: 10,
-        marginBottom: 10,
+        // marginBottom: ,
         borderRadius: 5,
         backgroundColor: "white",
         shadowOffst: { width: 2, height: 1 },
