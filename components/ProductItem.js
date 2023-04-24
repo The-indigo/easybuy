@@ -4,16 +4,21 @@ import {
     StyleSheet,
     Image,
     Dimensions,
-    Pressable
+    Pressable,
+    TouchableOpacity
   } from "react-native";
   import Colors from "../util/Colors";
 import Button from "./Button";
+import { Ionicons } from "@expo/vector-icons";
+
 
   const width = (Dimensions.get('window').width - 4 * 10) / 2;
 
-const ProductItem=({source,name,price})=>{
+const ProductItem=({source,name,price,setWidth,wishlist})=>{
     return (
-        <View style={styles.productItemView}>
+        <View style={[styles.productItemView,{
+          width:setWidth?setWidth:width,
+        }]}>
         <View style={styles.imageView}>
             <Image source={source} style={styles.productImage}/>
         </View>
@@ -21,8 +26,17 @@ const ProductItem=({source,name,price})=>{
          
         <Text>{name}</Text>
         <Text style={styles.prodcutPrice} >{`$${price}`}</Text>
+        {wishlist?
+        <View style={styles.buttonsView}>
+<Button wishlist/>
+<TouchableOpacity>
+  <View style={styles.iconView}>
+  <Ionicons name="trash-outline" size={20}/>
+  </View>
+</TouchableOpacity>
+</View>:<Button/>
+}
 
-      <Button/>
 
         </View>
 
@@ -32,7 +46,6 @@ const ProductItem=({source,name,price})=>{
 }
 const styles= StyleSheet.create({
     productItemView:{
-        width:width,
         marginBottom:20,
         borderRadius:10,
         elevation: 3,
@@ -58,6 +71,18 @@ const styles= StyleSheet.create({
         fontWeight:'bold',
         fontSize:16
       },
+      buttonsView:{
+        flexDirection:'row',
+        justifyContent:'space-evenly',
+        alignItems:'center',
+        // borderWidth:2
+      },
+      iconView:{
+        borderWidth:2,
+        padding:1,
+        borderColor:Colors.Grey,
+        borderRadius:20
+      }
 
 })
 

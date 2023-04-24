@@ -7,9 +7,11 @@ import {
   } from "react-native";
   import Colors from "../util/Colors";
 
-const Button=({text,color,padding})=>{
+const Button=({text,color,padding,wishlist})=>{
     return (
-        <TouchableOpacity onPress={()=>{console.log('');}}>
+        <TouchableOpacity onPress={()=>{console.log('');}} style={{
+         width:wishlist&&'40%'
+        }}>
         <View style={[styles.addToCartButton,{
              backgroundColor: color?color:Colors.PrimaryColor,
              paddingVertical:padding?padding:9,
@@ -21,8 +23,7 @@ const Button=({text,color,padding})=>{
 }
 const styles= StyleSheet.create({
     addToCartButton:{
-       
-        marginTop:10,
+        marginTop:10,        
         borderRadius:4
       },
       addToCartText:{
