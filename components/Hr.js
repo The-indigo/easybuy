@@ -1,9 +1,11 @@
 import { StyleSheet, View } from "react-native"
 import Colors from "../util/Colors";
 
-const Hr=()=>{
+const Hr=({margin})=>{
     return(
-        <View style={styles.hr}>
+        <View style={[styles.hr,{
+            marginTop:margin?margin:10
+        }]}>
 
         </View>
     )
@@ -12,7 +14,7 @@ const styles= StyleSheet.create({
     hr:{
         borderWidth:0.3,
         borderColor:Colors.BorderColor,
-        marginTop:10
+    
       },
 })
 export default Hr;
