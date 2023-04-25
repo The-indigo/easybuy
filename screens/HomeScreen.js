@@ -14,7 +14,12 @@ import Products from "../data/Products";
 import CategoryItem from "../components/CategoryItem";
 import ProductItem from "../components/ProductItem";
 
-const HomeScreen = () => {
+const HomeScreen = ({route,navigation}) => {
+  const handleNavigate=(id)=>{
+    navigation.navigate('Details',{
+        productId:id
+    })
+}
   return (
     <SafeAreaView style={styles.flex}>
       <View style={styles.rootView}>
@@ -96,7 +101,9 @@ const HomeScreen = () => {
             keyExtractor={(item)=>item.id}
             renderItem={(itemData)=>{
                 return (
-               <ProductItem source={itemData.item.image} name={itemData.item.name} price={itemData.item.price}/>
+               <ProductItem 
+               onPress={()=>handleNavigate(itemData.item.id)}
+               source={itemData.item.image} name={itemData.item.name} price={itemData.item.price}/>
                 )
             }}
             />

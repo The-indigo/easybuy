@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import Colors from "../util/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -12,34 +12,40 @@ import {
 import ColorPicker from "../components/ColorPicker";
 import Hr from "../components/Hr";
 import Button from "../components/Button";
+import Products from "../data/Products";
 
 let height = Dimensions.get("window").height * 0.3;
-let width=Dimensions.get("window").width;
 const DetailScreen = ({ route, navigation }) => {
+  // const [displayProduct,setDisplayProduct]=useState({})
+  const { productId } = route.params;
+  const displayProduct = Products.find((n) => n.id === productId);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
         return <Ionicons name={"cart-outline"} size={23} />;
       },
     });
-  }, []); //   console.log(height)
+  }, []);
   return (
     <View style={styles.root}>
       <View style={styles.flex}>
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+        >
           <View style={styles.imageView}>
             <Image
               style={styles.image}
-              source={require("../assets/maxpods.png")}
+              source={displayProduct.image}
+              // source={require("../assets/maxpods.png")}
             />
           </View>
           <View style={styles.productDetailsView}>
             <View style={styles.productNameLikeView}>
               <View>
                 <Text style={styles.productNameText}>
-                  Air pods max by Apple
+                  {displayProduct.name}
                 </Text>
-                  <Text style={styles.productPriceText}>$ 1999,99 </Text>
+                <Text style={styles.productPriceText}>{`$ ${displayProduct.price}`} </Text>
               </View>
               <View style={styles.iconView}>
                 <Ionicons name="heart-outline" size={20} color={"grey"} />
@@ -74,12 +80,13 @@ const DetailScreen = ({ route, navigation }) => {
             </View>
           </View>
         </ScrollView>
-        <View style={{
-                paddingHorizontal: 30,
-        }}>
-        <Button/>
+        <View
+          style={{
+            paddingHorizontal: 30,
+          }}
+        >
+          <Button />
         </View>
-      
       </View>
     </View>
   );
@@ -87,7 +94,7 @@ const DetailScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
-    marginBottom:35
+    marginBottom: 35,
   },
   root: {
     flex: 1,
@@ -96,7 +103,7 @@ const styles = StyleSheet.create({
   imageView: {
     elevation: 3,
     shadowOpacity: 0.4,
-    backgroundColor: Colors.ProductBackgroundColor,
+    backgroundColor: 'white',
     shadowRadius: 5,
   },
   image: {
@@ -147,10 +154,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontFamily: "Inter_700Bold",
   },
-  descriptionText:{
-    fontFamily:"Inter_400Regular",
-    lineHeight:26
-  }
+  descriptionText: {
+    fontFamily: "Inter_400Regular",
+    lineHeight: 26,
+  },
 });
 
 export default DetailScreen;

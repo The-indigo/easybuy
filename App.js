@@ -18,7 +18,7 @@ import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
 import WishlistScreen from './screens/WishlistScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import {useCallback, useEffect, useState } from 'react';
+import {useCallback, useEffect } from 'react';
 import SearchScreen from './screens/SearchScreen';
 import DetailScreen from './screens/DetailScreen';
 
@@ -140,6 +140,9 @@ export default function App() {
       <Stack.Screen
       name='Authenticated'
       component={AuthenticatedScreen}
+      options={{
+        headerShown:false
+      }}
       />  
             </Stack.Navigator>
 

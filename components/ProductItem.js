@@ -14,9 +14,9 @@ import { Ionicons } from "@expo/vector-icons";
 
   const width = (Dimensions.get('window').width - 4 * 10) / 2;
 
-const ProductItem=({source,name,price,setWidth,wishlist})=>{
+const ProductItem=({source,name,price,setWidth,wishlist,onPress})=>{
     return (
-        <View style={[styles.productItemView,{
+        <Pressable onPress={onPress} style={[styles.productItemView,{
           width:setWidth?setWidth:width,
         }]}>
         <View style={styles.imageView}>
@@ -41,7 +41,7 @@ const ProductItem=({source,name,price,setWidth,wishlist})=>{
         </View>
 
         
-    </View>
+    </Pressable>
     )
 }
 const styles= StyleSheet.create({
