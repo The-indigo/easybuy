@@ -4,9 +4,6 @@ import { SafeAreaProvider} from "react-native-safe-area-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from 'expo-splash-screen';
-
-import { Text } from 'react-native';
-
 import { NavigationContainer } from "@react-navigation/native";
 import * as Font from 'expo-font';
 import {
@@ -33,9 +30,9 @@ const Tab=createBottomTabNavigator()
 
 
 
-const AuthenticatedScreen=()=>{
+const TabScreen=()=>{
   return (
-    <Tab.Navigator>
+        <Tab.Navigator>
       <Tab.Screen
       name="Home"
       component={HomeScreen}
@@ -66,7 +63,9 @@ const AuthenticatedScreen=()=>{
           return <Ionicons name={"heart-outline"} size={18}/>
         }
       }}
+      
       />
+    
 
 <Tab.Screen
       name="Profile"
@@ -80,6 +79,37 @@ const AuthenticatedScreen=()=>{
       />
 
     </Tab.Navigator>
+
+  )
+}
+
+const AuthenticatedScreen=()=>{
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+            name="Tab"
+            component={TabScreen}
+            options={{
+              headerShown:false
+            }}
+      />
+
+              <Stack.Screen 
+      name='Details'
+      component={DetailScreen}
+      options={{
+        headerTitle:"Deatails Product"
+      }}
+      />
+
+      <Stack.Screen 
+      name='Search'
+      component={SearchScreen}
+      options={{
+        headerShown:false
+      }}
+      />
+    </Stack.Navigator>
   )
 }
 
@@ -106,27 +136,14 @@ export default function App() {
     
    <SafeAreaProvider>
     <NavigationContainer onReady={onLayoutRootView}>
-      {/* <Stack.Navigator>
+      <Stack.Navigator>
+      <Stack.Screen
+      name='Authenticated'
+      component={AuthenticatedScreen}
+      />  
+            </Stack.Navigator>
 
-      <Stack.Screen 
-      name='Details'
-      component={DetailScreen}
-      options={{
-        headerTitle:"Deatails Product"
-      }}
-      />
-
-      <Stack.Screen 
-      name='Search'
-      component={SearchScreen}
-      options={{
-        headerShown:false
-      }}
-      />
-
-            </Stack.Navigator> */}
-
-      <AuthenticatedScreen/>
+     
     </NavigationContainer>
    </SafeAreaProvider>
   );

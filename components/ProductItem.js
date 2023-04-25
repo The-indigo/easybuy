@@ -50,7 +50,9 @@ const styles= StyleSheet.create({
         borderRadius:10,
         elevation: 3,
         shadowOpacity:0.15,
-        backgroundColor:Colors.ProductBackgroundColor
+        backgroundColor: '#D5E0ED',
+
+        // backgroundColor:Colors.ProductBackgroundColor
       },
       imageView:{
         paddingBottom:10
