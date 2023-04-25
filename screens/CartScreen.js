@@ -46,7 +46,7 @@ const CartScreen = ({ route, navigation }) => {
                 <Text style={styles.totalText}>Total</Text>
                 <Text style={styles.totalText}>$ 12000</Text>
             </View>
-            <Button color={Colors.DarkGrey} text={'Continue to payments'} padding={12}/>
+            <Button text={'Continue to payments'} padding={12}/>
         </View>
       </View>
     </View>
