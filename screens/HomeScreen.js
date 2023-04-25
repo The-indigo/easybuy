@@ -13,6 +13,7 @@ import Colors from "../util/Colors";
 import Products from "../data/Products";
 import CategoryItem from "../components/CategoryItem";
 import ProductItem from "../components/ProductItem";
+import IconNumber from "../components/IconNumber";
 
 const HomeScreen = ({route,navigation}) => {
   const handleNavigate=(id)=>{
@@ -31,7 +32,7 @@ const HomeScreen = ({route,navigation}) => {
             </Text>
           </View>
           <View style={styles.detailsIconView}>
-            <Ionicons name={"cart-outline"} size={18} />
+            <IconNumber/>           
             <Ionicons name={"notifications-outline"} size={18} />
           </View>
         </View>
@@ -160,6 +161,6 @@ const styles = StyleSheet.create({
     color: Colors.HeadingColor,
     fontFamily:'Inter_400Regular'
   },
-  
+
 });
 export default HomeScreen;
