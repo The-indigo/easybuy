@@ -24,7 +24,6 @@ const RegisterScreen = ({ authScreenHandler }) => {
     confirmPassword: false,
   });
 
-  // {console.log(email)}
 
   const updateInput = (inputType, value) => {
     switch (inputType) {
@@ -57,13 +56,17 @@ const RegisterScreen = ({ authScreenHandler }) => {
       const passwordsAreEqual = password === confirmPassword;
       const addressNotEmpty = address.length != 0;
     const phoneIsAcceptable = phone.length >= 10 && phone.length < 12;
+    const fullNameIsValid= fullname.length!==0
 
-      if (!emailIsValid || !passwordIsValid || !passwordsAreEqual || !phoneIsAcceptable || !addressNotEmpty) {
-      Alert.alert("Invalid input", "Please check your entered credentials.");
+
+
+      if (!emailIsValid || !passwordIsValid || !passwordsAreEqual || !phoneIsAcceptable || !addressNotEmpty || !fullNameIsValid) {
+        Alert.alert("Invalid input", "Ensure corect input please dkm!!..");
       setCredentialsInvalid({
         email: !emailIsValid,
         confirmEmail: !emailIsValid,
         password: !passwordIsValid,
+        fullname:!fullNameIsValid,
           confirmPassword: !passwordIsValid || !passwordsAreEqual,
           phone: !phoneIsAcceptable,
           address:!addressNotEmpty
@@ -72,25 +75,26 @@ const RegisterScreen = ({ authScreenHandler }) => {
           setIsLoading(false)
       return;
       }
-    //   try {
-    //       const signupResponse = await signUp(email, password, phone, address, fullname)   
-    //       if (signupResponse.hasOwnProperty('idToken') ) {
-    //     authContext.authenticate(signupResponse.idToken,signupResponse.user)
-    //           return;
-    //       }
-    //       if (signupResponse.response.data!== undefined) {
-    //           switch (signupResponse.response.data.error.message) {
-    //               case ('EMAIL_EXISTS'):
-    //                   Alert.alert('Yikes!!!..This email already exists');
-    //                   break;
-    //                 default:
-    //                   Alert.alert('Yikes!!!..Something went wrong');   
-    //           }
-    //    }
-    //   } catch (e) {
-    //       Alert.alert("Yikes!! Try again"); 
-    //       console.log('signup screen error' + e);
-    //   }
+      try {
+          const signupResponse = await signUp(email, password, phone, address, fullname)   
+          if (signupResponse.hasOwnProperty('idToken') ) {
+            await
+        authContext.authenticate(signupResponse.idToken,signupResponse.user)
+              return;
+          }
+          if (signupResponse.response.data!== undefined) {
+              switch (signupResponse.response.data.error.message) {
+                  case ('EMAIL_EXISTS'):
+                      Alert.alert('Yikes!!!..This email already exists');
+                      break;
+                    default:
+                      Alert.alert('Yikes!!!..Something went wrong');   
+              }
+       }
+      } catch (e) {
+          Alert.alert("Yikes!! Try again"); 
+          console.log('signup screen error' + e);
+      }
    setIsLoading(false)
   }
   return (

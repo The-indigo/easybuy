@@ -1,11 +1,11 @@
 import { View, StyleSheet, Text,Alert } from "react-native";
 import InputText from "../components/InputText";
 import { useContext, useState } from "react";
-// import { signIn } from "../services/authService";
 // import { AuthContext } from "../store/authContext";
 import { ActivityIndicator } from "react-native";
 import AlternativeAuthText from "../components/AlternativeAuthText";
 import Button from "../components/Button";
+import { signIn } from "../util/services/authService";
 
 
 const LoginScreen = ({authScreenHandler}) => {
@@ -29,21 +29,22 @@ const LoginScreen = ({authScreenHandler}) => {
     }
       };
     const submitHandler = async () => {
-    setIsLoading(true)
-    let trimEmail = email.trim();
-    const emailIsValid =trimEmail.includes("@");
-    const passwordIsValid = password.length > 6 && password!==undefined;
-      if (!emailIsValid || !passwordIsValid) {
-      Alert.alert("Yikes!!..Please check your input");
-      setCredentialsInvalid({
-        email: !emailIsValid,
-        password: !passwordIsValid,
-      });
-          setIsLoading(false)
-      return;
-      }
+        signIn(email, password) 
+    // setIsLoading(true)
+    // let trimEmail = email.trim();
+    // const emailIsValid =trimEmail.includes("@");
+    // const passwordIsValid = password.length > 6 && password!==undefined;
+    //   if (!emailIsValid || !passwordIsValid) {
+    //   Alert.alert("Yikes!!..Please check your input");
+    //   setCredentialsInvalid({
+    //     email: !emailIsValid,
+    //     password: !passwordIsValid,
+    //   });
+    //       setIsLoading(false)
+    //   return;
+    //   }
       try {
-    //       const signinResponse = await signIn(email, password)   
+        //   const signinResponse = await signIn(email, password)   
     //       if (signinResponse.hasOwnProperty('idToken') ) {
     //           authContext.authenticate(signinResponse.idToken, signinResponse.user)
            
