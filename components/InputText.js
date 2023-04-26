@@ -18,7 +18,6 @@ const InputText = ({field,value,keyboardType,secure,onUpdateValue,isInvalid}) =>
 }
 const style = StyleSheet.create({
      textInput: {
-        // borderBottomColor: colors.loading,
         borderBottomWidth: 2,
         marginBottom:25
     },

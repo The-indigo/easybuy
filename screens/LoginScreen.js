@@ -8,8 +8,6 @@ import AlternativeAuthText from "../components/AlternativeAuthText";
 import Button from "../components/Button";
 
 
-
-
 const LoginScreen = ({authScreenHandler}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
