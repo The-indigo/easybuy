@@ -7,9 +7,9 @@ import {
   } from "react-native";
   import Colors from "../util/Colors";
 
-const Button=({text,color,padding,wishlist})=>{
+const Button=({text,color,padding,wishlist,onPress})=>{
     return (
-        <TouchableOpacity onPress={()=>{console.log('');}} style={{
+        <TouchableOpacity onPress={onPress} style={{
          width:wishlist&&'40%'
         }}>
         <View style={[styles.addToCartButton,{

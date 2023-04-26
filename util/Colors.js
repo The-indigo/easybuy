@@ -7,6 +7,9 @@ ProductBackgroundColor:'##EDF7FF',
 Grey:'#ECECEC',
 DarkGrey:'#939393',
 button100: '#0c1012',
+Mahogany: '#C04000',
+White: '#fff',
+
 
 }
 export default Colors

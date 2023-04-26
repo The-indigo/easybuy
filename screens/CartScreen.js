@@ -1,11 +1,10 @@
-import { FlatList, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import Hr from "../components/Hr";
 import { useLayoutEffect } from "react";
 import CartItem from "../components/CartItem";
 import Products from "../data/Products";
 import Button from "../components/Button";
-import Colors from "../util/Colors";
+import IconNumber from "../components/IconNumber";
 
 const CartScreen = ({ route, navigation }) => {
   useLayoutEffect(() => {
@@ -18,7 +17,7 @@ const CartScreen = ({ route, navigation }) => {
               paddingHorizontal: 15,
             }}
           >
-            <Ionicons name={"cart-outline"} size={23} />
+           <IconNumber/>
           </View>
           </Pressable>
         );

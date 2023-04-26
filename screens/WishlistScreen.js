@@ -1,10 +1,30 @@
-import { ScrollView, StyleSheet, Text, View,    Dimensions,
+import { ScrollView, StyleSheet,Pressable, View,    Dimensions,
 } from "react-native"
 import ProductItem from "../components/ProductItem";
+import { useLayoutEffect } from "react";
+import IconNumber from "../components/IconNumber";
 
 const width = (Dimensions.get('window').width) ;
 
-const WishlistScreen=()=>{
+const WishlistScreen=({route,navigation})=>{
+
+    useLayoutEffect (() => {
+        navigation.setOptions({
+          headerRight: () => {
+            return (
+                <Pressable onPress={()=>{console.log('cart');}}>
+              <View
+                style={{
+                  paddingHorizontal: 15,
+                }}
+              >
+               <IconNumber/>
+              </View>
+              </Pressable>
+            );
+          },
+        });
+      }, []);
     return (
         <View style={styles.root}>
             <View style={styles.flex}>

@@ -21,6 +21,8 @@ import ProfileScreen from './screens/ProfileScreen';
 import {useCallback, useEffect } from 'react';
 import SearchScreen from './screens/SearchScreen';
 import DetailScreen from './screens/DetailScreen';
+import LoginScreen from './screens/LoginScreen';
+import AuthScreen from './screens/AuthScreen';
 
 
 
@@ -113,6 +115,23 @@ const AuthenticatedScreen=()=>{
   )
 }
 
+const AuthenticationScreen=()=>{
+  return (
+    <Stack.Navigator
+    screenOptions={
+      {
+        headerShown:false
+      }
+    }
+    >
+      <Stack.Screen
+     name="Authentication"
+     component={AuthScreen}
+      />
+    </Stack.Navigator>
+  )
+}
+
 export default function App() {
   let [fontsLoaded] = useFonts({
     Inter_900Black,
@@ -138,12 +157,20 @@ export default function App() {
     <NavigationContainer onReady={onLayoutRootView}>
       <Stack.Navigator>
       <Stack.Screen
+      name='Auth'
+      component={AuthenticationScreen}
+      options={{
+        headerShown:false
+      }}
+      />  
+      <Stack.Screen
       name='Authenticated'
       component={AuthenticatedScreen}
       options={{
         headerShown:false
       }}
       />  
+
             </Stack.Navigator>
 
      
