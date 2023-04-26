@@ -70,7 +70,6 @@ const RegisterScreen = ({ authScreenHandler }) => {
           confirmPassword: !passwordIsValid || !passwordsAreEqual,
           phone: !phoneIsAcceptable,
           address:!addressNotEmpty
-        
       });
           setIsLoading(false)
       return;

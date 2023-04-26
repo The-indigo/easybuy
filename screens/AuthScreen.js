@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, StyleSheet, TouchableWithoutFeedback,Keyboard, Image } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback,Keyboard, Image, KeyboardAvoidingView, Platform } from "react-native";
 import Colors from "../util/Colors";
 import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
@@ -12,6 +12,11 @@ const AuthScreen = ({ route, navigation }) => {
   };
 
     return (
+      <KeyboardAvoidingView 
+      behavior={Platform.OS==='ios'? 'padding' :'height'}
+      style= {{
+flex:1
+      }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={style.root}>
           <View style={{alignSelf:'center',marginBottom:30 }}>
@@ -25,6 +30,7 @@ const AuthScreen = ({ route, navigation }) => {
       )}
             </View>
               </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
   );
 };
 const style = StyleSheet.create({
