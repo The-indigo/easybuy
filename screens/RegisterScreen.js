@@ -1,12 +1,13 @@
 import { View,  StyleSheet, Text, Alert,ActivityIndicator } from "react-native";
 import InputText from "../components/InputText";
-import { useContext, useState } from "react";
-// import { signUp } from "../services/authService";
-// import { AuthContext } from "../store/authContext";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import AlternativeAuthText from "../components/AlternativeAuthText";
 import Button from "../components/Button";
+import { authenticate } from "../store/authReducer";
 
 const RegisterScreen = ({ authScreenHandler }) => {
+  const dispatch=useDispatch()
     // const authContext=useContext(AuthContext)
     const [isLoading,setIsLoading]=useState(false)
   const [email, setEmail] = useState("");
@@ -77,8 +78,8 @@ const RegisterScreen = ({ authScreenHandler }) => {
       try {
           const signupResponse = await signUp(email, password, phone, address, fullname)   
           if (signupResponse.hasOwnProperty('idToken') ) {
-            await
-        authContext.authenticate(signupResponse.idToken,signupResponse.user)
+            await dispatch(authenticate(signupResponse.idToken,signupResponse.user))
+        // authContext.authenticate()
               return;
           }
           if (signupResponse.response.data!== undefined) {

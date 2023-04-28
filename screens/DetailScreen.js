@@ -13,16 +13,19 @@ import ColorPicker from "../components/ColorPicker";
 import Hr from "../components/Hr";
 import Button from "../components/Button";
 import Products from "../data/Products";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import IconNumber from "../components/IconNumber";
 
 let height = Dimensions.get("window").height * 0.3;
-const DetailScreen = ({ route, navigation }) => {
-  // const [displayProduct,setDisplayProduct]=useState({})
+const DetailScreen = () => {
+  const navigation=useNavigation()
+  const route= useRoute()
   const { productId } = route.params;
   const displayProduct = Products.find((n) => n.id === productId);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
-        return <Ionicons name={"cart-outline"} size={23} />;
+        return <IconNumber/>
       },
     });
   }, []);

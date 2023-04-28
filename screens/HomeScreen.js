@@ -14,12 +14,17 @@ import Products from "../data/Products";
 import CategoryItem from "../components/CategoryItem";
 import ProductItem from "../components/ProductItem";
 import IconNumber from "../components/IconNumber";
+import { useNavigation } from "@react-navigation/native";
 
-const HomeScreen = ({route,navigation}) => {
+const HomeScreen = () => {
+  const navigation=useNavigation()
   const handleNavigate=(id)=>{
-    navigation.navigate('Details',{
-        productId:id
-    })
+    navigation.navigate('Authenticated',{
+      screen:'Details', 
+    params:{
+      productId:id
+  }
+  })
 }
   return (
     <SafeAreaView style={styles.flex}>

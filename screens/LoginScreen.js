@@ -6,9 +6,11 @@ import { ActivityIndicator } from "react-native";
 import AlternativeAuthText from "../components/AlternativeAuthText";
 import Button from "../components/Button";
 import { signIn } from "../util/services/authService";
+import { useNavigation } from "@react-navigation/native";
 
 
 const LoginScreen = ({authScreenHandler}) => {
+  const navigation=useNavigation()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false)
@@ -30,20 +32,23 @@ const LoginScreen = ({authScreenHandler}) => {
       };
     const submitHandler = async () => {
         signIn(email, password) 
-    // setIsLoading(true)
-    // let trimEmail = email.trim();
-    // const emailIsValid =trimEmail.includes("@");
-    // const passwordIsValid = password.length > 6 && password!==undefined;
-    //   if (!emailIsValid || !passwordIsValid) {
-    //   Alert.alert("Yikes!!..Please check your input");
-    //   setCredentialsInvalid({
-    //     email: !emailIsValid,
-    //     password: !passwordIsValid,
-    //   });
-    //       setIsLoading(false)
-    //   return;
-    //   }
+    setIsLoading(true)
+    let trimEmail = email.trim();
+    const emailIsValid =trimEmail.includes("@");
+    const passwordIsValid = password.length > 6 && password!==undefined;
+      if (!emailIsValid || !passwordIsValid) {
+      Alert.alert("Yikes!!..Please check your input");
+      setCredentialsInvalid({
+        email: !emailIsValid,
+        password: !passwordIsValid,
+      });
+          setIsLoading(false)
+      return;
+      }
+      navigation.navigate('Authenticated')
+      
       try {
+
         //   const signinResponse = await signIn(email, password)   
     //       if (signinResponse.hasOwnProperty('idToken') ) {
     //           authContext.authenticate(signinResponse.idToken, signinResponse.user)
@@ -59,7 +64,8 @@ const LoginScreen = ({authScreenHandler}) => {
     //           }
     //    } setIsLoading(false)
     //       }
-         
+    
+    setIsLoading(false)
       } catch (e) {
           Alert.alert("Yikes!! Try again"); 
           console.log('signin screen error' + e);

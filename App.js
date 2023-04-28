@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from 'react-redux';
+import { legacy_createStore as createStore} from 'redux'
 import * as Font from 'expo-font';
 import {
   useFonts,
@@ -23,10 +25,11 @@ import SearchScreen from './screens/SearchScreen';
 import DetailScreen from './screens/DetailScreen';
 import LoginScreen from './screens/LoginScreen';
 import AuthScreen from './screens/AuthScreen';
+import authReducer from './store/authReducer';
 
 
 
-
+const store=createStore(authReducer)
 const Stack= createNativeStackNavigator()
 const Tab=createBottomTabNavigator()
 
@@ -153,28 +156,29 @@ export default function App() {
    
   return (
     
+    <Provider store={store}>
    <SafeAreaProvider>
     <NavigationContainer onReady={onLayoutRootView}>
-      <Stack.Navigator>
+      <Stack.Navigator
+      screenOptions = {{
+        headerShown:false
+      }}
+      >
       <Stack.Screen
       name='Auth'
       component={AuthenticationScreen}
-      options={{
-        headerShown:false
-      }}
       />  
-      <Stack.Screen
-      name='Authenticated'
-      component={AuthenticatedScreen}
-      options={{
-        headerShown:false
-      }}
-      />  
+    <Stack.Screen
+     name="Authenticated"
+     component={AuthenticatedScreen}
+      />
 
             </Stack.Navigator>
 
      
     </NavigationContainer>
    </SafeAreaProvider>
+   </Provider>
+
   );
 }
