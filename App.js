@@ -28,12 +28,14 @@ import AuthScreen from './screens/AuthScreen';
 import authReducer, { authenticate} from './store/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import cartReducer from './store/cartReducer';
+import wishlistReducer from './store/wishlistReducer';
 
 
 
 const reducer=combineReducers({
   auth:authReducer,
-  cart:cartReducer
+  cart:cartReducer,
+  wishlist:wishlistReducer
 })
 
 const store=createStore(reducer)
