@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/authReducer";
 const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth.user);
   return (
     <View style={style.root}>
       <View style={style.backgroundContainer}></View>

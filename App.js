@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import { legacy_createStore as createStore} from 'redux'
+import { combineReducers, legacy_createStore as createStore} from 'redux'
 import * as Font from 'expo-font';
 import {
   useFonts,
@@ -25,12 +25,18 @@ import SearchScreen from './screens/SearchScreen';
 import DetailScreen from './screens/DetailScreen';
 import LoginScreen from './screens/LoginScreen';
 import AuthScreen from './screens/AuthScreen';
-import authReducer, { authenticate, isAuthenticated } from './store/authReducer';
+import authReducer, { authenticate} from './store/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import cartReducer from './store/cartReducer';
 
 
 
-const store=createStore(authReducer)
+const reducer=combineReducers({
+  auth:authReducer,
+  cart:cartReducer
+})
+
+const store=createStore(reducer)
 const Stack= createNativeStackNavigator()
 const Tab=createBottomTabNavigator()
 
@@ -136,7 +142,7 @@ const AuthenticationScreen=()=>{
 }
 
 const Navigation=()=>{ 
-  const authState=useSelector(state=>state)
+  const authState=useSelector(state=>state.auth)
   let isAuth=authState.idToken;
   return(
     <NavigationContainer>

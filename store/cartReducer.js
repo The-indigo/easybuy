@@ -1,4 +1,4 @@
-const cartReducer=(state,action)=>{
+const cartReducer=(state=[],action)=>{
     switch(action.type){
         case('INITIALIZE'):
         return 
