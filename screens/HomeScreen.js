@@ -15,9 +15,11 @@ import CategoryItem from "../components/CategoryItem";
 import ProductItem from "../components/ProductItem";
 import IconNumber from "../components/IconNumber";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 const HomeScreen = () => {
   const navigation=useNavigation()
+  const user=useSelector(state=>state.auth.user)
   const handleNavigate=(id)=>{
     navigation.navigate('Authenticated',{
       screen:'Details', 
@@ -33,7 +35,7 @@ const HomeScreen = () => {
           <View style={styles.deliveryAddressView}>
             <Text style={styles.deliveryText}>Delivery Address</Text>
             <Text style={styles.deliveryAddress}>
-              Salatiga City, Central Java
+              {user.address}
             </Text>
           </View>
           <View style={styles.detailsIconView}>
