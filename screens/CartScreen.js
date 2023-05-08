@@ -5,8 +5,10 @@ import CartItem from "../components/CartItem";
 import Products from "../data/Products";
 import Button from "../components/Button";
 import IconNumber from "../components/IconNumber";
+import { useSelector } from "react-redux";
 
 const CartScreen = ({ route, navigation }) => {
+  const cart=useSelector(state=>state.cart)
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
@@ -17,7 +19,7 @@ const CartScreen = ({ route, navigation }) => {
               paddingHorizontal: 15,
             }}
           >
-           <IconNumber/>
+           <IconNumber cartLength={cart.length}/>
           </View>
           </Pressable>
         );
@@ -27,9 +29,14 @@ const CartScreen = ({ route, navigation }) => {
   return (
     <View style={styles.root}>
       <Hr margin={1} />
-      <View style={styles.flex}>
+      <View style={[styles.flex,{
+        justifyContent:'center',
+        alignItems:'center'
+      }]}>
+        {cart.length===0?<Text>You have no item in your cart</Text> :
+        <>
         <FlatList
-        data={Products}
+        data={cart}
         keyExtractor={(item)=>item.id}
         showsVerticalScrollIndicator={false}
         renderItem={(itemData)=>{
@@ -40,6 +47,7 @@ const CartScreen = ({ route, navigation }) => {
             )
         }}
         />
+      
         <View style={styles.totalView}>
             <View style={styles.totalTextView}>
                 <Text style={styles.totalText}>Total</Text>
@@ -47,7 +55,10 @@ const CartScreen = ({ route, navigation }) => {
             </View>
             <Button text={'Continue to payments'} padding={12}/>
         </View>
+        </>
+        }
       </View>
+
     </View>
   );
 };

@@ -5,13 +5,13 @@ import {
   } from "react-native";
   import { Ionicons } from "@expo/vector-icons";
 
-const IconNumber=()=>{
+const IconNumber=({cartLength})=>{
     return (
         <View style={styles.container}>
         <Ionicons name={"cart-outline"} size={20} color="black" />
         {1 > 0 && ( 
           <View style={styles.numberContainer}>
-            <Text style={styles.numberText}>8</Text> 
+            <Text style={styles.numberText}>{cartLength}</Text> 
           </View>
         )}
       </View>

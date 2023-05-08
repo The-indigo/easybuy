@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 const HomeScreen = () => {
   const navigation=useNavigation()
   const user=useSelector(state=>state.auth.user)
+  const cart=useSelector(state=>state.cart)
   const handleNavigate=(id)=>{
     navigation.navigate('Authenticated',{
       screen:'Details', 
@@ -39,7 +40,7 @@ const HomeScreen = () => {
             </Text>
           </View>
           <View style={styles.detailsIconView}>
-            <IconNumber/>           
+            <IconNumber cartLength={cart.length}/>           
             <Ionicons name={"notifications-outline"} size={18} />
           </View>
         </View>
