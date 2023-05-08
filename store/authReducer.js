@@ -16,6 +16,9 @@ const authReducer=(state=initialState,action)=>{
         idToken:action.payload.idToken,
 
         }
+        case('LOGOUT'):
+        AsyncStorage.clear()
+        return initialState
         default:
             return state
     }
@@ -29,6 +32,11 @@ export const authenticate=(idToken,user)=>{
             idToken:idToken
         }
 
+    }
+}
+export const logout=()=>{
+    return {
+        type:'LOGOUT'
     }
 }
 
