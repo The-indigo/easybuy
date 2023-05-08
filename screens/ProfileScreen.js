@@ -47,7 +47,10 @@ const ProfileScreen = () => {
         <View style={style.profileInfoContainer}>
           <Button text={"Terms Of Use"} />
           <Button text={"Privacy Policy"} />
-          <Button text={"Sign Out"} onPress={() => dispatch(logout())} />
+          <Button text={"Sign Out"} onPress={() =>
+               dispatch({ type: 'auth/logout' })  
+          } />
+          
         </View>
       </View>
     </View>

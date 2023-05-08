@@ -2,7 +2,6 @@ import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native
 import Hr from "../components/Hr";
 import { useLayoutEffect } from "react";
 import CartItem from "../components/CartItem";
-import Products from "../data/Products";
 import Button from "../components/Button";
 import IconNumber from "../components/IconNumber";
 import { useSelector } from "react-redux";
