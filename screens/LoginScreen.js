@@ -1,16 +1,18 @@
 import { View, StyleSheet, Text,Alert } from "react-native";
 import InputText from "../components/InputText";
-import { useContext, useState } from "react";
-// import { AuthContext } from "../store/authContext";
+import { useState } from "react";
 import { ActivityIndicator } from "react-native";
 import AlternativeAuthText from "../components/AlternativeAuthText";
 import Button from "../components/Button";
 import { signIn } from "../util/services/authService";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../store/authReducer";
 
 
 const LoginScreen = ({authScreenHandler}) => {
   const navigation=useNavigation()
+  const dispatch=useDispatch()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false)
@@ -44,26 +46,16 @@ const LoginScreen = ({authScreenHandler}) => {
       });
           setIsLoading(false)
       return;
-      }
-      navigation.navigate('Authenticated')
-      
+      }      
       try {
-
-        //   const signinResponse = await signIn(email, password)   
-    //       if (signinResponse.hasOwnProperty('idToken') ) {
-    //           authContext.authenticate(signinResponse.idToken, signinResponse.user)
-           
-    //       } else {
-    //            if (signinResponse.response.data!== undefined) {
-    //           switch (signinResponse.response.data.error.message) {
-    //               case ('EMAIL_NOT_FOUND' || 'INVALID_PASSWORD'):
-    //                   Alert.alert("oops!!!..Not you trying to use the wrong details");
-    //                   break;
-    //                 default:
-    //                   Alert.alert('Yikes!!!..Something went wrong');   
-    //           }
-    //    } setIsLoading(false)
-    //       }
+          const signinResponse = await signIn(email, password)   
+          if (signinResponse.hasOwnProperty('idToken') ) {
+            dispatch(authenticate(signinResponse.idToken, signinResponse.user))
+          } else {
+               if (signinResponse.response.data!== undefined) {
+                      Alert.alert(signinResponse.response.data.error.message);
+       } setIsLoading(false)
+          }
     
     setIsLoading(false)
       } catch (e) {

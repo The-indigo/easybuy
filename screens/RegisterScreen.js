@@ -4,11 +4,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import AlternativeAuthText from "../components/AlternativeAuthText";
 import Button from "../components/Button";
+import { signUp } from "../util/services/authService";
 import { authenticate } from "../store/authReducer";
+import { useNavigation } from "@react-navigation/native";
 
 const RegisterScreen = ({ authScreenHandler }) => {
-  const dispatch=useDispatch()
-    // const authContext=useContext(AuthContext)
+const navigaton=useNavigation()
     const [isLoading,setIsLoading]=useState(false)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -78,7 +79,8 @@ const RegisterScreen = ({ authScreenHandler }) => {
       try {
           const signupResponse = await signUp(email, password, phone, address, fullname)   
           if (signupResponse.hasOwnProperty('idToken') ) {
-            await dispatch(authenticate(signupResponse.idToken,signupResponse.user))
+            authScreenHandler()
+            // await dispatch(authenticate(signupResponse.idToken,signupResponse.user))
         // authContext.authenticate()
               return;
           }

@@ -35,25 +35,23 @@ export const signUp = async (email, password, phone, address, name) => {
 };
 
 export const signIn = async (email, password) => {
-//   try {
-//     const response = await axios.post(signinurl, {
-//       email,
-//       password,
-//     });
-//     if (response.data.idToken) {
-//       const user = await axios.get(
-//         `https://foodapp1-438d9-default-rtdb.firebaseio.com/users/${response.data.localId}.json`
-//       );
-//       // const user = await axios.get(`https://foodapp1-438d9-default-rtdb.firebaseio.com/users.json?orderBy="uuid"&startAt=${response.data.localId}`)
-
-//       if (user) {
-//         return { status: 200, idToken: response.data.idToken, user: user.data };
-//       }
-//     }
-//   } catch (e) {
-//     // console.log(e);
-//     // console.log(`signup error ${e.response.data.error.message}`);
-//      return e;
-//     // console.log(`readable form ${JSON.stringify(e)}`);
-//   }
+  try {
+    const response = await axios.post(signinurl, {
+      email,
+      password,
+    });
+    if (response.data.idToken) {
+      const user = await axios.get(
+        `https://easybuy-cc55d-default-rtdb.firebaseio.com/users/${response.data.localId}.json`,
+      );
+      if (user) {
+        return { status: 200, idToken: response.data.idToken, user: user.data };
+      }
+    }
+  } catch (e) {
+    // console.log(e);
+    // console.log(`signin error ${e.response.data.error.message}`);
+     return e;
+    // console.log(`readable form ${JSON.stringify(e)}`);
+  }
 };

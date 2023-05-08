@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from "@react-navigation/native";
-import { Provider } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { legacy_createStore as createStore} from 'redux'
 import * as Font from 'expo-font';
 import {
@@ -20,19 +20,19 @@ import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
 import WishlistScreen from './screens/WishlistScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import {useCallback, useEffect } from 'react';
+import {useCallback, useEffect, useLayoutEffect } from 'react';
 import SearchScreen from './screens/SearchScreen';
 import DetailScreen from './screens/DetailScreen';
 import LoginScreen from './screens/LoginScreen';
 import AuthScreen from './screens/AuthScreen';
-import authReducer from './store/authReducer';
+import authReducer, { authenticate, isAuthenticated } from './store/authReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 const store=createStore(authReducer)
 const Stack= createNativeStackNavigator()
 const Tab=createBottomTabNavigator()
-
 
 
 const TabScreen=()=>{
@@ -135,7 +135,20 @@ const AuthenticationScreen=()=>{
   )
 }
 
-export default function App() {
+const Navigation=()=>{ 
+  const authState=useSelector(state=>state)
+  let isAuth=authState.idToken;
+  return(
+    <NavigationContainer>
+      {isAuth&&<AuthenticatedScreen/>}
+      {!isAuth&&<AuthenticationScreen/>}
+    </NavigationContainer>
+  )
+
+}
+
+const Root=()=>{
+  const dispatch=useDispatch()
   let [fontsLoaded] = useFonts({
     Inter_900Black,
     Inter_400Regular,
@@ -144,39 +157,40 @@ export default function App() {
   Inter_700Bold
   });
 
+  useLayoutEffect(()=>{
+    const fetchToken=async()=>{
+      const userToken=await AsyncStorage.getItem('token')
+    const userString=await AsyncStorage.getItem("user")
+    if(userString && userToken){
+      const user=JSON.parse(userString)
+      dispatch(authenticate(userToken,user))
+    }
+    }
+    fetchToken()
+  },[])
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
+
   if(!fontsLoaded){
     return null
   }
+
+  return (
+    <Navigation onReady={onLayoutRootView}/>
+  )
+}
+
+export default function App() {
    
   return (
     
     <Provider store={store}>
    <SafeAreaProvider>
-    <NavigationContainer onReady={onLayoutRootView}>
-      <Stack.Navigator
-      screenOptions = {{
-        headerShown:false
-      }}
-      >
-      <Stack.Screen
-      name='Auth'
-      component={AuthenticationScreen}
-      />  
-    <Stack.Screen
-     name="Authenticated"
-     component={AuthenticatedScreen}
-      />
-
-            </Stack.Navigator>
-
-     
-    </NavigationContainer>
+        <Root/>
    </SafeAreaProvider>
    </Provider>
 

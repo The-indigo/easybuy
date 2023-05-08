@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage"
+
 const initialState={
     idToken:'',
     user:{}
@@ -5,16 +7,21 @@ const initialState={
 }
 
 const authReducer=(state=initialState,action)=>{
-    if(action.tytpe==='AUTHENTICATE'){
+    switch(action.type){
+        case('AUTHENTICATE'):
+        AsyncStorage.setItem("token", action.payload.idToken)
+        AsyncStorage.setItem("user", JSON.stringify(action.payload.user))
         return {...state,
             user:action.payload.user,
         idToken:action.payload.idToken,
 
         }
+        default:
+            return state
     }
-    return state
+
 }
-export const authenticate=async(idToken,user)=>{
+export const authenticate=(idToken,user)=>{
     return {
         type:'AUTHENTICATE',
         payload:{
@@ -24,4 +31,5 @@ export const authenticate=async(idToken,user)=>{
 
     }
 }
+
 export default authReducer

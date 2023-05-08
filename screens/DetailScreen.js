@@ -25,7 +25,7 @@ const DetailScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
-        return <IconNumber/>
+        return <IconNumber/> 
       },
     });
   }, []);
