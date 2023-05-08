@@ -50,7 +50,11 @@ const LoginScreen = ({authScreenHandler}) => {
       try {
           const signinResponse = await signIn(email, password)   
           if (signinResponse.hasOwnProperty('idToken') ) {
-            dispatch(authenticate(signinResponse.idToken, signinResponse.user))
+            // dispatch(authenticate(signinResponse.idToken, signinResponse.user))
+            dispatch({ type: 'auth/authenticate', payload:{
+              user:signinResponse.user,
+              idToken:signinResponse.idToken
+            }  })
           } else {
                if (signinResponse.response.data!== undefined) {
                       Alert.alert(signinResponse.response.data.error.message);

@@ -29,16 +29,16 @@ import authReducer, { authenticate} from './store/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import cartReducer from './store/cartReducer';
 import wishlistReducer from './store/wishlistReducer';
+import { configureStore } from '@reduxjs/toolkit';
 
 
-
-const reducer=combineReducers({
+const store=configureStore({
+reducer:{
   auth:authReducer,
   cart:cartReducer,
   wishlist:wishlistReducer
-})
-
-const store=createStore(reducer)
+}
+} )
 const Stack= createNativeStackNavigator()
 const Tab=createBottomTabNavigator()
 
@@ -171,7 +171,11 @@ const Root=()=>{
     const userString=await AsyncStorage.getItem("user")
     if(userString && userToken){
       const user=JSON.parse(userString)
-      dispatch(authenticate(userToken,user))
+      dispatch({ type: 'auth/authenticate', payload:{
+        user:user,
+        idToken:userToken
+      }  })
+      // dispatch(authenticate(userToken,user))
     }
     }
     fetchToken()
