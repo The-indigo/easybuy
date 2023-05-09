@@ -12,11 +12,11 @@ return (
     <View style={styles.quantityRoot}>
       <View>
         <Text style={styles.nameText}>{name}</Text>
-        <Text style={styles.priceText1}>{price}</Text>
+        <Text style={styles.priceText1}>${price}</Text>
       </View>
 
       <View style={styles.quantityView}>
-        <Text style={styles.priceText}>{itemTotal}</Text>
+        <Text style={styles.priceText}>${itemTotal}</Text>
         <TouchableOpacity onPress={addQuantity}>
         <View style={styles.iconView}>
           <Ionicons name="add" size={20} />

@@ -5,7 +5,7 @@ import CartItem from "../components/CartItem";
 import Button from "../components/Button";
 import IconNumber from "../components/IconNumber";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteItem, total } from "../store/cartReducer";
+import { decreaseQuantity, deleteItem, increaseQuantity, total } from "../store/cartReducer";
 
 const CartScreen = ({ route, navigation }) => {
   const cart=useSelector(state=>state.cart)
@@ -70,6 +70,8 @@ let totalValue=handleTotal()
           uri:itemData.item.image}}
           quantity={itemData.item.quantity}
         price={itemData.item.price}
+        addQuantity={()=>dispatch(increaseQuantity(itemData.item.id))}
+        removeQuantuty={()=>dispatch(decreaseQuantity(itemData.item.id))}
         itemTotal={itemData.item.price*itemData.item.quantity}
         deleteItem={()=>handleDeleteItem(itemData.item.id)}
         />          

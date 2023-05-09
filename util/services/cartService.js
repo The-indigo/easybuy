@@ -74,3 +74,36 @@ export const deleteCartItem = async (id) => {
        console.log(e.response.data);
     }
   }
+
+  export const updateCartItem = async (operation, id) => {
+    const url = `https://easybuy-cc55d-default-rtdb.firebaseio.com/cart/${id}.json`;
+  
+    try {
+      const getCartItem = await axios.get(url);
+      if (getCartItem.data) {
+        const productId = getCartItem.data.productId;
+        const productUrl = `https://easybuy-cc55d-default-rtdb.firebaseio.com/product/${productId}.json`;
+        const getProduct = await axios.get(productUrl);
+  
+        if (operation === "increment") {
+          await axios.patch(url, {
+            quantity: {
+              ".sv": { increment: 1 },
+            },
+            // total: getProduct.data.price * (getCartItem.data.quantity + 1),
+          });
+        } else if (operation === "decrement" && getCartItem.data.quantity !== 1) {
+                  await axios.patch(url, {
+            quantity: {
+              ".sv": { increment: -1 },
+            },
+            // total: getProduct.data.price * (getCartItem.data.quantity - 1),
+          });  
+            
+      
+        }
+      }
+    } catch (e) {
+      console.log(e.response.data);
+    }
+  };
