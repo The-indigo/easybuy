@@ -23,7 +23,6 @@ const HomeScreen = () => {
   const dispatch=useDispatch()
   const navigation=useNavigation()
   const user=useSelector(state=>state.auth.user)
-  const cart=useSelector(state=>state.cart)
   const handleNavigate=(id)=>{
     navigation.navigate('Authenticated',{
       screen:'Details', 
@@ -31,6 +30,9 @@ const HomeScreen = () => {
       productId:id
   }
   })
+}
+const handleAddToCart=(item)=>{
+  dispatch(addItem(item))
 }
   return (
     <SafeAreaView style={styles.flex}>
@@ -43,7 +45,7 @@ const HomeScreen = () => {
             </Text>
           </View>
           <View style={styles.detailsIconView}>
-            <IconNumber cartLength={cart.length}/>           
+            <IconNumber/>           
             <Ionicons name={"notifications-outline"} size={18} />
           </View>
         </View>
@@ -115,7 +117,7 @@ const HomeScreen = () => {
                 return (
                <ProductItem 
                onPress={()=>handleNavigate(itemData.item.id)}
-               addToCart={()=> dispatch(addItem(itemData.item)) }
+               addToCart={()=> handleAddToCart(itemData.item) }
               //  source={itemData.item.image}
                source={{
                 uri: itemData.item.image,

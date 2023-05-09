@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addItemToCart } from "../util/services/cartService"
+import { addItemToCart, getCartItems } from "../util/services/cartService"
 const initialState=[]
 const cartReducer=createSlice({
     name:'cart',
@@ -27,6 +27,14 @@ export const addItem=item=>{
         dispatch(addToCart(response.data))
     }
 }
+
+export const initializeCart = () => {
+    return async dispatch => {
+      const items = await getCartItems()
+      dispatch(iniitalize(items.cartItems))
+    }
+  }
+
 export default cartReducer.reducer
 
     

@@ -25,6 +25,7 @@ export const addItemToCart = async (data) => {
         const updateResponse = await axios.patch(updateurl, {
             "id":response.data.name
         })
+        dataObject.id=response.data.name
         return {status: 200,data:dataObject}; 
     }  
 
@@ -36,7 +37,8 @@ export const addItemToCart = async (data) => {
 export const getCartItems=async()=>{
     const user=await AsyncStorage.getItem("user")
     const userId=JSON.parse(user).uuid
-    const getUrl = `https://easybuy-cc55d-default-rtdb.firebaseio.com/cart.json?orderBy="userId"&equalTo="${userId}"`;
+    if(userId){
+        const getUrl = `https://easybuy-cc55d-default-rtdb.firebaseio.com/cart.json?orderBy="userId"&equalTo="${userId}"`;
 
     try{
         const response=await axios.get(getUrl)
@@ -57,6 +59,8 @@ export const getCartItems=async()=>{
             return { status: 200, cartItems: cartItems };
           }
     }catch(e){
-        return e
+        console.log(e.response.message);
+        return e.response.message
     }
+}
 }

@@ -27,7 +27,7 @@ import LoginScreen from './screens/LoginScreen';
 import AuthScreen from './screens/AuthScreen';
 import authReducer, { authenticate} from './store/authReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import cartReducer from './store/cartReducer';
+import cartReducer, { initializeCart } from './store/cartReducer';
 import wishlistReducer from './store/wishlistReducer';
 import { configureStore } from '@reduxjs/toolkit';
 import { addProduct, fetchProducts } from './util/services/productService';
@@ -186,10 +186,8 @@ const Root=()=>{
     }
     const getProducts=async()=>{
       const products=await fetchProducts()
-      // console.log(products);
-      // if(products){
         dispatch({ type: 'product/initialize', payload:products.products })
-      // }
+          dispatch(initializeCart()) 
     }
    
     fetchToken()

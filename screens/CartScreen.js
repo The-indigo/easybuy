@@ -28,19 +28,25 @@ const CartScreen = ({ route, navigation }) => {
   return (
     <View style={styles.root}>
       <Hr margin={1} />
-      <View style={[styles.flex,{
-        justifyContent:'center',
-        alignItems:'center'
-      }]}>
-        {cart.length===0?<Text>You have no item in your cart</Text> :
-        <>
+           {cart.length===0?
+           <View style={[styles.flex,{
+            justifyContent:'center',
+            alignItems:'center'
+           }]}> 
+           <Text>You have no item in your cart</Text> 
+           </View>
+           :
+      <View style={[styles.flex]}>
+   
         <FlatList
         data={cart}
         keyExtractor={(item)=>item.id}
         showsVerticalScrollIndicator={false}
         renderItem={(itemData)=>{
             return (
-        <CartItem name={itemData.item.name} image={itemData.item.image}
+        <CartItem name={itemData.item.name} image={{
+          
+          uri:itemData.item.image}}
         price={itemData.item.price}
         />          
             )
@@ -54,10 +60,9 @@ const CartScreen = ({ route, navigation }) => {
             </View>
             <Button text={'Continue to payments'} padding={12}/>
         </View>
-        </>
-        }
+       
       </View>
-
+ }
     </View>
   );
 };

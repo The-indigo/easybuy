@@ -4,14 +4,17 @@ import {
     StyleSheet,
   } from "react-native";
   import { Ionicons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 const IconNumber=({cartLength})=>{
+  const cart=useSelector(state=>state.cart)
+  
     return (
         <View style={styles.container}>
         <Ionicons name={"cart-outline"} size={20} color="black" />
         {1 > 0 && ( 
           <View style={styles.numberContainer}>
-            <Text style={styles.numberText}>{cartLength}</Text> 
+            <Text style={styles.numberText}>{cart.length}</Text> 
           </View>
         )}
       </View>
