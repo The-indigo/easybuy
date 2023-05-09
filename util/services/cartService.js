@@ -64,3 +64,13 @@ export const getCartItems=async()=>{
     }
 }
 }
+export const deleteCartItem = async (id) => {
+    const url = `https://easybuy-cc55d-default-rtdb.firebaseio.com/cart/${id}.json`;
+    try {
+      const response = await axios.delete(url);
+       return { status: 200};
+      
+    } catch (e) {
+       console.log(e.response.data);
+    }
+  }

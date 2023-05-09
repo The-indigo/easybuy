@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addItemToCart, getCartItems } from "../util/services/cartService"
+import { addItemToCart, deleteCartItem, getCartItems } from "../util/services/cartService"
 const initialState=[]
 const cartReducer=createSlice({
     name:'cart',
@@ -12,9 +12,9 @@ const cartReducer=createSlice({
         return [...state,action.payload]
         },
         removeFromCart(state,action){
-            const id=state.find(n=>n.id===action.payload.id)
+            const id=action.payload
             return state.filter(n=>n.id!==id)
-        }
+        },
     }
 })
 
@@ -34,6 +34,14 @@ export const initializeCart = () => {
       dispatch(iniitalize(items.cartItems))
     }
   }
+
+  export const deleteItem=id=>{
+    return async dispatch=>{
+        const response= await deleteCartItem(id)
+        dispatch(removeFromCart(id))
+    }
+  }
+ 
 
 export default cartReducer.reducer
 

@@ -4,10 +4,32 @@ import { useLayoutEffect } from "react";
 import CartItem from "../components/CartItem";
 import Button from "../components/Button";
 import IconNumber from "../components/IconNumber";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteItem, total } from "../store/cartReducer";
 
 const CartScreen = ({ route, navigation }) => {
   const cart=useSelector(state=>state.cart)
+  const dispatch=useDispatch()
+
+  const handleDeleteItem=(id)=>{
+    dispatch( deleteItem(id))
+  }
+  //handle the total value from the cart store
+const handleTotal=()=>{
+  let total=0;
+  total=cart.reduce((a,b)=>a+((b.price)*(b.quantity)),0)
+  return total;
+}
+
+// const handleItemTotal=(id)=>{
+//   let total=0;
+//   total=
+// }
+//variable holds the result of the total value
+//the app reloads when there is a state change 
+//and updates the screen
+let totalValue=handleTotal()
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
@@ -45,9 +67,11 @@ const CartScreen = ({ route, navigation }) => {
         renderItem={(itemData)=>{
             return (
         <CartItem name={itemData.item.name} image={{
-          
           uri:itemData.item.image}}
+          quantity={itemData.item.quantity}
         price={itemData.item.price}
+        itemTotal={itemData.item.price*itemData.item.quantity}
+        deleteItem={()=>handleDeleteItem(itemData.item.id)}
         />          
             )
         }}
@@ -56,7 +80,7 @@ const CartScreen = ({ route, navigation }) => {
         <View style={styles.totalView}>
             <View style={styles.totalTextView}>
                 <Text style={styles.totalText}>Total</Text>
-                <Text style={styles.totalText}>$ 12000</Text>
+                <Text style={styles.totalText}>${totalValue}</Text>
             </View>
             <Button text={'Continue to payments'} padding={12}/>
         </View>

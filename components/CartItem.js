@@ -2,7 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Colors from "../util/Colors";
 import { Ionicons } from "@expo/vector-icons";
 
-const CartItem=({name,image,price,addQuantity,removeQuantuty,deleteItem})=>{
+const CartItem=({name,image,price,quantity,itemTotal,addQuantity,removeQuantuty,deleteItem})=>{
 return (
     <View style={styles.cartItemView}>
     <View style={styles.imageView}>
@@ -16,13 +16,13 @@ return (
       </View>
 
       <View style={styles.quantityView}>
-        <Text style={styles.priceText}>{price}</Text>
+        <Text style={styles.priceText}>{itemTotal}</Text>
         <TouchableOpacity onPress={addQuantity}>
         <View style={styles.iconView}>
           <Ionicons name="add" size={20} />
         </View>
         </TouchableOpacity>
-        <Text>1</Text>
+        <Text>{quantity}</Text>
 
       <TouchableOpacity onPress={removeQuantuty}>
       <View style={styles.iconView}>
