@@ -113,6 +113,7 @@ const HomeScreen = () => {
                 return (
                <ProductItem 
                onPress={()=>handleNavigate(itemData.item.id)}
+              //  source={itemData.item.image}
                source={{
                 uri: itemData.item.image,
               }}

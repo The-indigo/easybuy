@@ -10,6 +10,7 @@ import {
   import Colors from "../util/Colors";
 import Button from "./Button";
 import { Ionicons } from "@expo/vector-icons";
+import ImagePlaceholder from 'react-native-image-with-placeholder'
 
 
   const width = (Dimensions.get('window').width - 4 * 10) / 2;
