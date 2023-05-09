@@ -15,10 +15,12 @@ import CategoryItem from "../components/CategoryItem";
 import ProductItem from "../components/ProductItem";
 import IconNumber from "../components/IconNumber";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../store/cartReducer";
 
 const HomeScreen = () => {
   const products=useSelector(state=>state.product)
+  const dispatch=useDispatch()
   const navigation=useNavigation()
   const user=useSelector(state=>state.auth.user)
   const cart=useSelector(state=>state.cart)
@@ -113,6 +115,7 @@ const HomeScreen = () => {
                 return (
                <ProductItem 
                onPress={()=>handleNavigate(itemData.item.id)}
+               addToCart={()=> dispatch(addItem(itemData.item)) }
               //  source={itemData.item.image}
                source={{
                 uri: itemData.item.image,

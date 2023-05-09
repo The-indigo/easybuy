@@ -15,7 +15,7 @@ import ImagePlaceholder from 'react-native-image-with-placeholder'
 
   const width = (Dimensions.get('window').width - 4 * 10) / 2;
 
-const ProductItem=({source,name,price,setWidth,wishlist,onPress})=>{
+const ProductItem=({source,name,price,setWidth,wishlist,onPress,addToCart})=>{
     return (
         <Pressable onPress={onPress} style={[styles.productItemView,{
           width:setWidth?setWidth:width,
@@ -35,7 +35,7 @@ const ProductItem=({source,name,price,setWidth,wishlist,onPress})=>{
   <Ionicons name="trash-outline" size={20}/>
   </View>
 </TouchableOpacity>
-</View>:<Button/>
+</View>:<Button onPress={addToCart}/>
 }
 
 
