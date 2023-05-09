@@ -3,17 +3,19 @@ import { Text, StyleSheet,Pressable, View,    Dimensions, FlatList,
 import ProductItem from "../components/ProductItem";
 import { useLayoutEffect } from "react";
 import IconNumber from "../components/IconNumber";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addWishlistToCart, deleteItem } from "../store/wishlistReducer";
+import { addItem } from "../store/cartReducer";
 
 const width = (Dimensions.get('window').width) ;
 
 const WishlistScreen=({route,navigation})=>{
   const wishlist=useSelector(state=>state.wishlist)
+  const dispatch=useDispatch()
     useLayoutEffect (() => {
         navigation.setOptions({
           headerRight: () => {
             return (
-                <Pressable onPress={()=>{console.log('cart');}}>
               <View
                 style={{
                   paddingHorizontal: 15,
@@ -21,11 +23,18 @@ const WishlistScreen=({route,navigation})=>{
               >
                <IconNumber/>
               </View>
-              </Pressable>
             );
           },
         });
       }, []);
+  
+      const handleDeleteWishlist=(id)=>{
+        dispatch(deleteItem(id))
+      }
+      const handleAddToCartFromWishlist=(data,id)=>{
+        dispatch(deleteItem(id))
+        dispatch(addItem(data))
+      }
     return (
         <View style={styles.root}>
 
@@ -46,9 +55,11 @@ const WishlistScreen=({route,navigation})=>{
         renderItem={(itemData)=>{
             return (
               <ProductItem 
+              wishlist
+              setWidth={width}
+              deleteWishlist={()=>handleDeleteWishlist(itemData.item.id)}
+              addToCartFromWishlist={()=>handleAddToCartFromWishlist(itemData.item,itemData.item.id)}
               // onPress={()=>handleNavigate(itemData.item.id)}
-              // addToCart={()=> handleAddToCart(itemData.item) }
-             //  source={itemData.item.image}
               source={{
                uri: itemData.item.image,
              }}

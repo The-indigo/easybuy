@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect } from "react";
 import Colors from "../util/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -8,20 +8,32 @@ import {
   Text,
   Image,
   Dimensions,
+  Pressable,
 } from "react-native";
-import ColorPicker from "../components/ColorPicker";
 import Hr from "../components/Hr";
 import Button from "../components/Button";
-import Products from "../data/Products";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import IconNumber from "../components/IconNumber";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, deleteItem } from "../store/wishlistReducer";
 
 let height = Dimensions.get("window").height * 0.3;
 const DetailScreen = () => {
+  const products=useSelector(state=>state.product)
+  const wishlist=useSelector(state=>state.wishlist)
+  const dispatch=useDispatch()
+
   const navigation=useNavigation()
   const route= useRoute()
   const { productId } = route.params;
-  const displayProduct = Products.find((n) => n.id === productId);
+  const displayProduct = products.find((n) => n.id === productId);
+    //checks if the item is already in wishlist
+  //by converting the result to a boolean value
+  let isItemInWishlist=!!wishlist.find(n=>n.productId===productId)
+  const handleAddToWishlist=(item,)=>{
+    dispatch(addItem(item))
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
@@ -38,7 +50,9 @@ const DetailScreen = () => {
           <View style={styles.imageView}>
             <Image
               style={styles.image}
-              source={displayProduct.image}
+              source={{
+                uri: displayProduct.image,
+              }}
               // source={require("../assets/maxpods.png")}
             />
           </View>
@@ -50,23 +64,28 @@ const DetailScreen = () => {
                 </Text>
                 <Text style={styles.productPriceText}>{`$ ${displayProduct.price}`} </Text>
               </View>
+              
+              <Pressable onPress={()=>handleAddToWishlist(displayProduct)} >
               <View style={styles.iconView}>
-                <Ionicons name="heart-outline" size={20} color={"grey"} />
+                <Ionicons name="heart-outline" size={20} 
+                color={isItemInWishlist?"red":"grey"} />
               </View>
+              </Pressable>
+             
             </View>
 
-            <Text style={styles.chooseColorText}>Choose the color</Text>
+            {/* <Text style={styles.chooseColorText}>Choose the color</Text>
             <View style={styles.colorPickerView}>
               <ColorPicker color={"#F5E3DF"} />
               <ColorPicker color={"#ECECEC"} />
               <ColorPicker color={"#E4F2DF"} />
               <ColorPicker color={"#D5E0ED"} />
               <ColorPicker color={"#3E3D40"} />
-            </View>
+            </View> */}
             <Hr />
             <View style={styles.descriptionView}>
               <Text style={styles.descriptionHeader}>
-                Description of product
+                Product Description
               </Text>
               <Text style={styles.descriptionText}>
                 Introducing AirPods Max, the pinnacle of wireless audio

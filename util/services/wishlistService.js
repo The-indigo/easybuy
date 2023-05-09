@@ -43,7 +43,7 @@ export const addItemToWishlist = async (data) => {
         price:data.price,
          image:data.image,
          userId:userId,
-         productId:data.productId
+         productId:data.id
     }
     const response = await axios.post(url, dataObject);
 
@@ -72,17 +72,4 @@ export const deleteWishlistItem = async (id) => {
     } catch (e) {
        console.log(e.response.data);
     }
-  }
-
-
-  export const addWishlistItemToCart = async (data,id) => {
-    try{
-        const response=await addItemToCart(data)
-        if(response.status===200){
-            await deleteWishlistItem(id)
-        }
-    }catch(e){
-        console.log(e)
-    }
-  
   }

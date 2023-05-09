@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addItemToWishlist, deleteWishlistItem, getWishlistItems } from "../util/services/wishlistService"
+import { addItemToWishlist, addWishlistItemToCart, deleteWishlistItem, getWishlistItems } from "../util/services/wishlistService"
 const initialState=[]
 
 const wishlistReducer=createSlice({
@@ -16,8 +16,9 @@ const wishlistReducer=createSlice({
             const id=action.payload
             return state.filter(n=>n.id!==id)
         },
-        // addWishlistToCart(state,action){
-
+        // addToCart(state,action){
+        //     const id=action.payload.id
+        //     return state.filter(n=>n.id!==id)
         // }
 
     }
@@ -44,6 +45,14 @@ export const initializeWishlist = () => {
         dispatch(removeWishlist(id))
     }
   }
+//   export const addWishlistToCart=(data,id)=>{
+//     return async dispatch=>{
+//         const response= await addWishlistItemToCart(data,id)
+//         dispatch( addToCart({
+//             id:id
+//         }))
+//     }
+//   }
 
 
 export default wishlistReducer.reducer

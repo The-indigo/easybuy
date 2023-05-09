@@ -10,12 +10,13 @@ import {
   import Colors from "../util/Colors";
 import Button from "./Button";
 import { Ionicons } from "@expo/vector-icons";
-import ImagePlaceholder from 'react-native-image-with-placeholder'
 
 
   const width = (Dimensions.get('window').width - 4 * 10) / 2;
 
-const ProductItem=({source,name,price,setWidth,wishlist,onPress,addToCart})=>{
+const ProductItem=({
+  source,name,price,setWidth,onPress,addToCart,
+  wishlist,deleteWishlist,addToCartFromWishlist})=>{
     return (
         <Pressable onPress={onPress} style={[styles.productItemView,{
           width:setWidth?setWidth:width,
@@ -29,8 +30,8 @@ const ProductItem=({source,name,price,setWidth,wishlist,onPress,addToCart})=>{
         <Text style={styles.prodcutPrice} >{`$${price}`}</Text>
         {wishlist?
         <View style={styles.buttonsView}>
-<Button wishlist/>
-<TouchableOpacity>
+<Button wishlist onPress={addToCartFromWishlist}/>
+<TouchableOpacity onPress={deleteWishlist}>
   <View style={styles.iconView}>
   <Ionicons name="trash-outline" size={20}/>
   </View>

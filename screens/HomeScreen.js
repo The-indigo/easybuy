@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../util/Colors";
-// import Products from "../data/Products";
 import CategoryItem from "../components/CategoryItem";
 import ProductItem from "../components/ProductItem";
 import IconNumber from "../components/IconNumber";
@@ -24,11 +23,10 @@ const HomeScreen = () => {
   const navigation=useNavigation()
   const user=useSelector(state=>state.auth.user)
   const handleNavigate=(id)=>{
-    navigation.navigate('Authenticated',{
-      screen:'Details', 
-    params:{
+    navigation.navigate('Details', 
+    {
       productId:id
-  }
+  
   })
 }
 const handleAddToCart=(item)=>{
