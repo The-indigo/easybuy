@@ -49,9 +49,6 @@ export const signIn = async (email, password) => {
       }
     }
   } catch (e) {
-    // console.log(e);
-    // console.log(`signin error ${e.response.data.error.message}`);
      return e;
-    // console.log(`readable form ${JSON.stringify(e)}`);
   }
 };
