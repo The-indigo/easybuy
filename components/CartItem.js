@@ -16,7 +16,7 @@ return (
       </View>
 
       <View style={styles.quantityView}>
-        <Text style={styles.priceText}>$199,99</Text>
+        <Text style={styles.priceText}>{price}</Text>
         <TouchableOpacity onPress={addQuantity}>
         <View style={styles.iconView}>
           <Ionicons name="add" size={20} />
