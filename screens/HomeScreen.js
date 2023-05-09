@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../util/Colors";
-import Products from "../data/Products";
+// import Products from "../data/Products";
 import CategoryItem from "../components/CategoryItem";
 import ProductItem from "../components/ProductItem";
 import IconNumber from "../components/IconNumber";
@@ -18,6 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
 const HomeScreen = () => {
+  const products=useSelector(state=>state.product)
   const navigation=useNavigation()
   const user=useSelector(state=>state.auth.user)
   const cart=useSelector(state=>state.cart)
@@ -105,14 +106,17 @@ const HomeScreen = () => {
                 justifyContent: 'space-between'
             }}
             numColumns={2}
-            data={Products}
+            data={products}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item)=>item.id}
             renderItem={(itemData)=>{
                 return (
                <ProductItem 
                onPress={()=>handleNavigate(itemData.item.id)}
-               source={itemData.item.image} name={itemData.item.name} price={itemData.item.price}/>
+               source={{
+                uri: itemData.item.image,
+              }}
+                name={itemData.item.name} price={itemData.item.price}/>
                 )
             }}
             />

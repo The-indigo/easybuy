@@ -30,13 +30,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import cartReducer from './store/cartReducer';
 import wishlistReducer from './store/wishlistReducer';
 import { configureStore } from '@reduxjs/toolkit';
+import { addProduct, fetchProducts } from './util/services/productService';
+import productReducer from './store/productReducer';
 
 
 const store=configureStore({
 reducer:{
   auth:authReducer,
   cart:cartReducer,
-  wishlist:wishlistReducer
+  wishlist:wishlistReducer,
+  product:productReducer
 }
 } )
 const Stack= createNativeStackNavigator()
@@ -169,6 +172,9 @@ const Root=()=>{
     const fetchToken=async()=>{
       const userToken=await AsyncStorage.getItem('token')
     const userString=await AsyncStorage.getItem("user")
+    // const products=await addProduct()
+    // console.log(products);
+
     if(userString && userToken){
       const user=JSON.parse(userString)
       dispatch({ type: 'auth/authenticate', payload:{
@@ -178,7 +184,16 @@ const Root=()=>{
       // dispatch(authenticate(userToken,user))
     }
     }
+    const getProducts=async()=>{
+      const products=await fetchProducts()
+      // console.log(products);
+      // if(products){
+        dispatch({ type: 'product/initialize', payload:products.products })
+      // }
+    }
+   
     fetchToken()
+    getProducts()
   },[])
 
   const onLayoutRootView = useCallback(async () => {
